@@ -62,7 +62,7 @@
 	qcom,fg-cutoff-voltage-mv = <3400>;
 	qcom,fg-cc-cv-threshold-mv = <4390>;
 	qcom,cl-max-increment-deciperc = <1>;
-	qcom,cl-max-decrement-deciperc = <1>;
+	qcom,cl-max-decrement-deciperc = <0>;
 	qcom,fg-delta-soc = <1>;
 	qcom,bad-battery-detection-enable;
 	qcom,hold-soc-while-full;
