@@ -26,7 +26,7 @@
 	qcom,battery-data = <&qrd_batterydata>;
 	qcom,float-voltage-mv = <4400>;
 	qcom,chg-inhibit-fg;
-	qcom,thermal-mitigation = <2000 1500 1200 700 0>;
+	qcom,thermal-mitigation = <2000 1500 1200 700 500>;
 	status = "okay";
 	qcom,vchg_sns-vadc = <&pmi8950_vadc>;
 	qcom,vchg-adc-channel-id = <3>;
@@ -49,11 +49,11 @@
 
 &qpnp_fg {
 	qcom,battery-data = <&qrd_batterydata>;
-	qcom,cold-bat-decidegc = <(0)>;
-	qcom,cool-bat-decidegc = <(150)>;
+	qcom,cold-bat-decidegc = <(900)>;
+	qcom,cool-bat-decidegc = <(950)>;
 	qcom,hot-bat-decidegc = <550>;
-	qcom,warm-bat-decidegc = <450>;
-	qcom,warm-bat-india-decidegc = <500>;
+	qcom,warm-bat-decidegc = <1000>;
+	qcom,warm-bat-india-decidegc = <1000>;
 	qcom,fg-iterm-ma = <180>;
 	qcom,fg-chg-iterm-ma = <130>;
 	qcom,resume-soc = <99>;
