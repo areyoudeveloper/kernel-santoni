@@ -1454,7 +1454,7 @@ static int smbchg_charging_en(struct smbchg_chip *chip, bool en)
 #define CURRENT_500_MA		500
 #define CURRENT_900_MA		900
 #define CURRENT_1500_MA		1500
-#define SUSPEND_CURRENT_MA	2
+#define SUSPEND_CURRENT_MA	500
 #define ICL_OVERRIDE_BIT	BIT(2)
 static int smbchg_usb_suspend(struct smbchg_chip *chip, bool suspend)
 {
@@ -1618,7 +1618,7 @@ static void smbchg_usb_update_online_work(struct work_struct *work)
 #define USBIN_LIMITED_MODE	0
 #define USBIN_HC_MODE		BIT(0)
 #define USB51_MODE_BIT		BIT(1)
-#define USB51_100MA		0
+#define USB51_100MA		BIT(1)
 #define USB51_500MA		BIT(1)
 static int smbchg_set_high_usb_chg_current(struct smbchg_chip *chip,
 							int current_ma)
@@ -1781,7 +1781,7 @@ static int smbchg_set_usb_current_max(struct smbchg_chip *chip,
 			chip->usb_max_current_ma = 500;
 		}
 #ifdef CONFIG_FORCE_FAST_CHARGE
-		if ((force_fast_charge > 0 && current_ma == CURRENT_500_MA) || current_ma == CURRENT_900_MA) {
+		if ((force_fast_charge > 0 && current_ma == CURRENT_500_MA) || current_ma == CURRENT_900_MA || current_ma == 0) {
 #else
 		if (current_ma == CURRENT_900_MA) {
 #endif
@@ -1800,7 +1800,7 @@ static int smbchg_set_usb_current_max(struct smbchg_chip *chip,
 				pr_err("Couldn't set CMD_IL rc = %d\n", rc);
 				goto out;
 			}
-			chip->usb_max_current_ma = 1500;
+			chip->usb_max_current_ma = 900;
 		}
 		break;
 	case POWER_SUPPLY_TYPE_USB_CDP:
@@ -2342,13 +2342,13 @@ static bool smbchg_is_parallel_usb_ok(struct smbchg_chip *chip,
 				min_current_thr_ma);
 		return false;
 	}
-
+/*
 	if (usb_icl_ma < min_current_thr_ma) {
 		pr_smb(PR_STATUS, "Weak USB chg skip enable: %d < %d\n",
 			usb_icl_ma, min_current_thr_ma);
 		return false;
 	}
-
+*/
 	if (!fcc_voter)
 		return false;
 	/*
