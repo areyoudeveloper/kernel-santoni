@@ -8,4 +8,10 @@ config MSM_APM
 	  SRAM Vmin requirements are met across different performance
 	  levels.
 
+config FORCE_FAST_CHARGE
+	bool "Force faster charge rate for USB"
+	default y
+	help
+	  This allows users to override default charge rate for USB
+
 endmenu
